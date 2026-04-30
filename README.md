@@ -24,6 +24,10 @@ cableada.
 La carpeta `web/` es la web final del proyecto. Las carpetas archivadas en
 `archive/` se mantienen solo como referencia historica.
 
+Version desplegada:
+
+https://enchanting-sopapillas-41b6a0.netlify.app
+
 Build de produccion:
 
 ```powershell
