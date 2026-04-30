@@ -1,0 +1,213 @@
+%----------------------------------------------------------------------------------------
+%	PAQUETES Y CONFIGURACIÓN DEL DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt]{article}
+% Tabla
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Tipografía
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{mathpazo}
+
+% Idioma
+\usepackage[spanish,es-noquoting,es-lcroman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\selectlanguage{spanish}
+
+% Márgenes e imágenes
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{
+  top=3cm,
+  bottom=3.5cm
+}
+
+% Encabezados y pies
+\usepackage{fancyhdr}
+
+% Estilo normal del documento (SIN imagen)
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{ELCO-Dealer}
+\rhead{\includegraphics[height=1cm]{logo.png}}
+\rfoot{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
+
+% Estilo SOLO para la portada (con imagen)
+\fancypagestyle{portada}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{%
+    \makebox[0pt][c]{\includegraphics[width=0.3\paperwidth]{footer_upm.png}}
+  }
+}
+
+\setlength{\footskip}{49pt}
+\setlength{\headheight}{33pt}
+
+% Formato de párrafos
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+\linespread{1.05}
+
+% Otros paquetes
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% Bibliografía
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}}
+\renewcommand{\@listI}{\itemsep=0pt}
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\maketitle}{
+  \begin{flushright}
+    {\LARGE\@title}
+
+    \vspace{50pt}
+
+    {\large\@author}\\
+    \@date
+
+    \vspace{40pt}
+  \end{flushright}
+}
+
+\title{\textbf{ELCO-Dealer}
+\\
+\textit{Diseño y Desarrollo de una Máquina Automatizada para Barajar y Repartir Cartas} \\ 
+\vspace{0.35cm}
+Electrónica de Consumo}
+
+\author{
+\textsc{
+Javier Carretero,\\
+Carlos González,\\
+Itziar Otaño,\\
+Álvaro Poveda,\\
+Cristina Rodríguez,\\
+Juan Salgado
+}\\[4pt]
+\textit{Universidad Politécnica de Madrid}
+}
+
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+%------------------- PORTADA -------------------
+
+\begin{titlepage}
+\thispagestyle{portada} % ✅ Imagen SOLO aquí
+
+\maketitle
+
+\end{titlepage}
+
+\clearpage
+\hypersetup{pageanchor=true}
+\setcounter{page}{1}
+
+%------------------- RESTO DEL DOCUMENTO -------------------
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+\input{Introducción.tex}
+
+\section{¿Qué es ELCO-Dealer?}
+El \textbf{ELCO-Dealer} es el prototipo desarrollado en este proyecto, concebido como un sistema autónomo y modular capaz de barajar y repartir cartas de forma precisa, repetitiva y controlada. Su finalidad es automatizar completamente el proceso de reparto, reduciendo la intervención humana y garantizando la consistencia del sistema.
+
+El diseño global se estructura en tres subsistemas principales: mecánico, electrónico y de control, que trabajan de forma coordinada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{BARAJADOR (1).png}
+    \caption{Primer diagrama del planteamiento del sistema}
+    \label{fig:diagrama}
+\end{figure}
+
+\subsection{Subsistema mecánico (estructura y movimiento)}
+
+El subsistema mecánico está formado por una estructura diseñada e impresa en 3D que integra tres elementos principales: los rodillos de arrastre, el soporte del mazo de cartas y un plato giratorio encargado del reparto.
+
+El diseño mecánico ha sido optimizado para asegurar una correcta manipulación de las cartas, garantizando su separación individual y reduciendo la probabilidad de atascos durante el funcionamiento continuo del sistema.
+
+\subsection{Subsistema electrónico (sensado y potencia)}
+
+El sistema electrónico se basa en una \textbf{Arduino MEGA 2560 R3}, que actúa como unidad central de control encargada de coordinar todos los procesos.
+
+Los actuadores del sistema (motores DC) son gestionados mediante el controlador \textbf{L298N}, que permite regular la corriente y dirección de los mismos de forma eficiente.
+
+El sistema de sensorización incluye una \textbf{barrera infrarroja}, que permite detectar el paso de cada carta y asegurar la correcta ejecución del reparto bajo el principio de una carta por detección. Además, un \textbf{sensor HOME} proporciona una referencia de posición inicial, permitiendo la calibración del sistema en cada arranque.
+
+Por otro lado, el uso de un \textbf{Slip Ring} permite la transmisión eléctrica continua en la parte giratoria del sistema, posibilitando rotaciones de 360º sin limitaciones por cableado.
+
+\subsection{Subsistema de control (interfaz y lógica)}
+
+El subsistema de control integra tanto el software embebido como la interfaz de usuario. A través de una \textbf{pantalla LCD} y un conjunto de pulsadores, el usuario puede configurar parámetros como el número de jugadores o el modo de funcionamiento de la máquina de forma intuitiva.
+
+El programa implementado en Arduino coordina todos los elementos del sistema, sincronizando sensores, actuadores y estados de operación para garantizar un funcionamiento estable y determinista.
+
+\subsection{Escalabilidad del sistema}
+
+Aunque se trata de un prototipo funcional, el diseño del ELCO-Dealer ha sido planteado con una visión de escalabilidad hacia un posible producto de consumo, contemplando mejoras como la reducción de costes, la optimización de componentes y la transición a placas electrónicas personalizadas (PCBs), con el objetivo de facilitar una futura producción a mayor escala.
+
+
+
+
+
+\newpage
+\section{Diseño del sistema}
+\input{Diseño sistema.tex}
+
+\subsection{Proceso de creación y montaje}
+\input{Conexiones Prototipo.tex}
+
+
+\newpage
+\section{Página web ELCO-Dealer}
+\input{web.tex}
+
+\newpage
+\section{Estrategia Comercial}
+\input{Estrategia comercial.tex}
+
+\newpage
+\section{Mejoras a futuro}
+\input{mejoras.tex}
+
+\nocite{*}
+
+\newpage
+\section{Conclusión}
+\input{Conclusión.tex}
+
+
+
+\newpage
+\begingroup
+\sloppy
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\endgroup
+
+\end{document}

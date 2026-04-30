@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELCO_DEALER | Arduino Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        
+        :root {
+            --bg-dark: #050505; 
+            --accent-gold: #c5a16f; 
+            --casino-red: #2b0707; 
+            --text-gold: #e8dcc4;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-dark);
+            color: var(--text-gold);
+            background-image: 
+                radial-gradient(circle at 80% 20%, var(--casino-red) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, #1a120a 0%, transparent 30%),
+                linear-gradient(#0f0f0f 1px, transparent 1px), 
+                linear-gradient(90deg, #0f0f0f 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+            background-attachment: fixed;
+        }
+
+        .casino-card {
+            background: linear-gradient(145deg, #0c0c0c 0%, #120808 100%);
+            border: 1px solid #1f1410;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #c5a16f 0%, #a37d4c 100%);
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #d4b68d 0%, #b39b7d 100%);
+            box-shadow: 0 0 30px rgba(197, 161, 111, 0.2);
+        }
+
+        input, textarea, select {
+            border: 1px solid #1a1a1a !important;
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-10 py-5 bg-black/95 backdrop-blur-md border-b border-[#1f1410]">
+        <div class="text-2xl font-black text-[#c5a16f] tracking-tighter cursor-pointer" onclick="window.scrollTo(0,0)">
+            ELCO<span class="text-white">-DEALER</span>
+        </div>
+        <div class="hidden md:flex space-x-10 font-bold text-gray-500 text-[10px] uppercase tracking-[0.3em]">
+            <a href="#features" class="hover:text-[#c5a16f] transition">Features</a>
+            <a href="#reviews" class="hover:text-[#c5a16f] transition">Reviews</a>
+            <a href="#specs" class="hover:text-[#c5a16f] transition">Specs</a>
+        </div>
+        <button onclick="checkout()" class="btn-gold px-8 py-2.5 rounded-full font-bold uppercase text-[10px] tracking-[0.2em] active:scale-95">Buy Now</button>
+    </nav>
+
+    <main id="buy" class="max-w-7xl mx-auto px-8 pt-48 pb-24 grid md:grid-cols-2 gap-16 items-center">
+        <div class="relative order-2 md:order-1">
+            <div class="casino-card p-6 rounded-[3rem] shadow-2xl">
+                <div class="bg-[#050505] rounded-[2rem] aspect-square flex items-center justify-center overflow-hidden border border-[#151515]">
+                    <img src="img/repartidor.jpg" class="w-full h-full object-cover opacity-70 contrast-125">
+                </div>
+            </div>
+            <div class="absolute -top-10 -left-5 bg-[#0c0c0c] p-5 rounded-2xl shadow-xl border border-[#c5a16f]/20 flex flex-col items-center">
+                <div class="text-[#c5a16f] text-[10px] mb-1">★★★★★</div>
+                <div class="text-sm font-black text-white">4.9/5 <span class="text-gray-600 font-medium ml-1">Rating</span></div>
+            </div>
+        </div>
+
+        <div class="order-1 md:order-2">
+            <span class="text-[#c5a16f] font-bold uppercase tracking-[0.4em] text-[10px] mb-5 block">CASINO-TECH PROTOTYPE</span>
+            <h1 class="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter text-white uppercase">
+                Precision<br><span class="text-[#c5a16f] italic">Powered</span><br>By Arduino
+            </h1>
+            <p class="text-gray-500 mt-10 text-xl leading-relaxed max-w-lg font-medium italic">
+                Automated card dealer powered by micro-processing logic. Absolute reliability for high-stakes gaming.
+            </p>
+
+            <div class="mt-12 flex items-center space-x-6">
+                <span class="text-5xl font-black text-white">€99.99</span>
+                <span class="text-2xl text-[#3d2f25] line-through font-bold">€120.00</span>
+            </div>
+
+            <div class="flex items-center space-x-4 mt-12">
+                <div class="flex items-center border border-[#1a1a1a] rounded-2xl p-1.5 bg-[#0c0c0c]">
+                    <button onclick="changeQty(-1)" class="w-12 h-12 flex items-center justify-center hover:text-[#c5a16f] transition font-black text-xl text-white">-</button>
+                    <input type="text" id="quantity" value="1" readonly class="w-14 text-center font-black text-2xl bg-transparent border-none text-white focus:ring-0 outline-none">
+                    <button onclick="changeQty(1)" class="w-12 h-12 flex items-center justify-center hover:text-[#c5a16f] transition font-black text-xl text-white">+</button>
+                </div>
+                <button onclick="addToCart()" class="flex-1 btn-gold py-5 rounded-2xl font-black text-xl uppercase tracking-widest active:scale-95">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+
+    <section id="features" class="py-32 bg-black/40">
+        <div class="max-w-6xl mx-auto px-8 text-center">
+            <h2 class="text-3xl font-black mb-20 uppercase italic text-[#c5a16f] tracking-[0.3em]">The System</h2>
+            <div class="grid md:grid-cols-3 gap-12 text-left">
+                <div class="p-10 rounded-[2.5rem] casino-card hover:border-[#c5a16f]/30 transition-all">
+                    <div class="text-2xl mb-6 text-[#c5a16f]">👥</div>
+                    <h3 class="font-bold text-lg mb-3 uppercase tracking-widest text-white">1-6 Players</h3>
+                    <p class="text-gray-600 leading-relaxed">Programmed for any table setup. Select participants with precision logic.</p>
+                </div>
+                <div class="p-10 rounded-[2.5rem] casino-card hover:border-[#c5a16f]/30 transition-all">
+                    <div class="text-2xl mb-6 text-[#c5a16f]">🔌</div>
+                    <h3 class="font-bold text-lg mb-3 uppercase tracking-widest text-white">Plug & Play</h3>
+                    <p class="text-gray-600 leading-relaxed">Direct power supply. Constant reliability without battery degradation.</p>
+                </div>
+                <div class="p-10 rounded-[2.5rem] casino-card hover:border-[#c5a16f]/30 transition-all">
+                    <div class="text-2xl mb-6 text-[#c5a16f]">🃏</div>
+                    <h3 class="font-bold text-lg mb-3 uppercase tracking-widest text-white">Universal</h3>
+                    <p class="text-gray-600 leading-relaxed">Full compatibility with Poker, Spanish decks, and all standard sized cards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-32 bg-[#050505]">
+        <div class="max-w-4xl mx-auto px-8">
+            <h2 class="text-3xl font-black mb-16 uppercase italic text-[#c5a16f] tracking-[0.3em] text-center">Community</h2>
+            
+            <div class="casino-card p-10 rounded-[3rem] mb-20 shadow-2xl">
+                <h3 class="text-[#c5a16f] font-bold mb-8 uppercase text-[10px] tracking-[0.3em]">Leave a Review</h3>
+                <div class="space-y-5">
+                    <input type="text" id="rev-name" placeholder="Full Name" class="w-full p-5 rounded-2xl outline-none focus:border-[#c5a16f]/50">
+                    <textarea id="rev-comment" placeholder="Your experience..." class="w-full p-5 rounded-2xl h-32 outline-none focus:border-[#c5a16f]/50"></textarea>
+                    <div class="flex justify-between items-center pt-2">
+                        <select id="rev-rating" class="p-4 rounded-xl outline-none font-bold text-sm">
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="3">★★★</option>
+                            <option value="2">★★</option>
+                            <option value="1">★</option>
+                        </select>
+                        <button onclick="enviarReseña()" class="btn-gold px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] active:scale-95">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reviews-display" class="space-y-8"></div>
+
+            <div id="show-more-container" class="hidden text-center mt-12">
+                <button onclick="toggleReviews()" id="btn-toggle-reviews" class="btn-gold px-12 py-4 rounded-2xl font-black uppercase text-xs tracking-[0.2em] active:scale-95">
+                    Show More Reviews
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="specs" class="py-32 bg-black border-t border-[#1a1a1a]">
+        <div class="max-w-6xl mx-auto px-8">
+            <div class="casino-card p-16 rounded-[4rem] flex flex-col md:flex-row items-center justify-between shadow-2xl">
+                <div class="text-left">
+                    <h2 class="text-3xl font-black mb-10 uppercase italic text-[#c5a16f] tracking-widest text-white">Specifications</h2>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-6 text-gray-500 text-lg">
+                        <li class="flex items-center"><span class="text-[#c5a16f] mr-4 text-xs">◆</span> Arduino Micro-Controller</li>
+                        <li class="flex items-center"><span class="text-[#c5a16f] mr-4 text-xs">◆</span> 1-6 Players </li>
+                        <li class="flex items-center"><span class="text-[#c5a16f] mr-4 text-xs">◆</span> Custom Deck Format Support</li>
+                    </ul>
+                </div>
+                <button onclick="checkout()" class="mt-12 md:mt-0 btn-gold px-14 py-7 rounded-2xl font-black text-xl uppercase tracking-[0.2em]">ORDER NOW</button>
+            </div>
+        </div>
+    </section>
+
+    <div onclick="toggleCart()" class="fixed bottom-8 right-8 z-[60] bg-[#c5a16f] p-4 rounded-full shadow-2xl cursor-pointer hover:scale-110 transition-transform active:scale-95">
+    <span id="cart-count" class="absolute -top-2 -right-2 bg-white text-black text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
+    <span class="text-2xl">🛒</span>
+</div>
+
+<div id="cart-modal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="toggleCart()"></div>
+    <div class="absolute right-0 top-0 h-full w-full max-w-md casino-card shadow-2xl p-8 flex flex-col border-l border-[#c5a16f]/20">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-black text-white uppercase italic tracking-widest">Your Cart</h2>
+            <button onclick="toggleCart()" class="text-gray-500 hover:text-white text-2xl">&times;</button>
+        </div>
+
+        <div id="cart-items" class="flex-1 overflow-y-auto space-y-6">
+            </div>
+
+        <div class="mt-8 pt-8 border-t border-[#1f1410]">
+            <div class="flex justify-between text-xl font-black text-white mb-6 uppercase tracking-tighter">
+                <span>Total</span>
+                <span id="cart-total">€0.00</span>
+            </div>
+            <button onclick="checkout()" class="w-full btn-gold py-5 rounded-2xl font-black text-xl uppercase tracking-widest active:scale-95">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>

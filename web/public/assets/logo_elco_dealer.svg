@@ -1,0 +1,130 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">ELCO-DEALER casino suits logo</title>
+  <desc id="desc">Luxury casino-tech diamond logo with card suits in gold, black, and red.</desc>
+  <defs>
+    <linearGradient id="gold" x1="171" y1="143" x2="853" y2="881" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0A8"/>
+      <stop offset="0.18" stop-color="#DCA646"/>
+      <stop offset="0.38" stop-color="#7A4512"/>
+      <stop offset="0.58" stop-color="#F3CA64"/>
+      <stop offset="0.8" stop-color="#9B5A16"/>
+      <stop offset="1" stop-color="#FFE28A"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="237" y1="214" x2="785" y2="810" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#25221A"/>
+      <stop offset="0.48" stop-color="#090909"/>
+      <stop offset="1" stop-color="#15110C"/>
+    </linearGradient>
+    <linearGradient id="red" x1="512" y1="231" x2="512" y2="458" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF493B"/>
+      <stop offset="0.48" stop-color="#D21319"/>
+      <stop offset="1" stop-color="#66050A"/>
+    </linearGradient>
+    <linearGradient id="diamondGold" x1="512" y1="610" x2="512" y2="872" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0A6"/>
+      <stop offset="0.42" stop-color="#D3972F"/>
+      <stop offset="1" stop-color="#6F3A0D"/>
+    </linearGradient>
+    <filter id="shadow" x="44" y="44" width="936" height="936" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#000000" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#D6A94F" flood-opacity="0.24"/>
+    </filter>
+    <filter id="innerGlow" x="119" y="119" width="786" height="786" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feBlend in="SourceGraphic" in2="blur" mode="screen"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="none"/>
+
+  <g filter="url(#shadow)">
+    <path d="M512 66L958 512L512 958L66 512L512 66Z" fill="url(#gold)"/>
+    <path d="M512 106L918 512L512 918L106 512L512 106Z" fill="#080808"/>
+    <path d="M512 132L892 512L512 892L132 512L512 132Z" fill="url(#panel)" stroke="url(#gold)" stroke-width="10"/>
+
+    <g filter="url(#innerGlow)" stroke="url(#gold)" stroke-linejoin="round">
+      <path d="M512 132L512 512" stroke-width="8"/>
+      <path d="M132 512L512 512" stroke-width="8"/>
+      <path d="M512 512L892 512" stroke-width="8"/>
+      <path d="M512 512L512 892" stroke-width="8"/>
+      <path d="M238 238L786 786" stroke-width="6" opacity="0.85"/>
+      <path d="M786 238L238 786" stroke-width="6" opacity="0.85"/>
+    </g>
+
+    <path d="M512 132L786 238L512 512L238 238L512 132Z" fill="#11100C" opacity="0.64"/>
+    <path d="M132 512L238 238L512 512L238 786L132 512Z" fill="#11100C" opacity="0.8"/>
+    <path d="M892 512L786 238L512 512L786 786L892 512Z" fill="#11100C" opacity="0.82"/>
+    <path d="M512 892L238 786L512 512L786 786L512 892Z" fill="#120D06" opacity="0.74"/>
+
+    <g stroke="url(#gold)" stroke-width="18" stroke-linejoin="round">
+      <path d="M512 132L892 512L512 892L132 512L512 132Z"/>
+      <path d="M512 174L850 512L512 850L174 512L512 174Z" opacity="0.55"/>
+    </g>
+  </g>
+
+  <!-- Heart -->
+  <path
+    d="M512 452C500 420 404 347 404 278C404 225 446 195 490 211C503 216 512 226 522 242C532 226 541 216 554 211C598 195 640 225 640 278C640 347 544 420 532 452C526 468 518 468 512 452Z"
+    fill="url(#red)"
+    stroke="url(#gold)"
+    stroke-width="16"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M512 452C500 420 404 347 404 278C404 225 446 195 490 211C503 216 512 226 522 242C532 226 541 216 554 211C598 195 640 225 640 278C640 347 544 420 532 452C526 468 518 468 512 452Z"
+    stroke="#1A0B04"
+    stroke-width="5"
+    opacity="0.85"
+  />
+
+  <!-- Spade -->
+  <path
+    d="M300 580C263 579 230 553 230 515C230 476 272 437 307 392C344 438 384 477 384 515C384 553 351 579 314 580L314 626H354V653H260V626H300V580Z"
+    fill="#10100E"
+    stroke="url(#gold)"
+    stroke-width="15"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M300 580C263 579 230 553 230 515C230 476 272 437 307 392C344 438 384 477 384 515C384 553 351 579 314 580L314 626H354V653H260V626H300V580Z"
+    stroke="#050505"
+    stroke-width="5"
+    opacity="0.9"
+  />
+
+  <!-- Club -->
+  <path
+    d="M702 567C675 567 654 548 654 522C654 496 675 478 701 478C699 452 718 430 745 430C773 430 791 452 789 478C815 478 836 496 836 522C836 548 815 567 788 567C779 567 771 565 762 561L762 626H802V653H688V626H728V561C720 565 711 567 702 567Z"
+    fill="#10100E"
+    stroke="url(#gold)"
+    stroke-width="15"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M702 567C675 567 654 548 654 522C654 496 675 478 701 478C699 452 718 430 745 430C773 430 791 452 789 478C815 478 836 496 836 522C836 548 815 567 788 567C779 567 771 565 762 561L762 626H802V653H688V626H728V561C720 565 711 567 702 567Z"
+    stroke="#050505"
+    stroke-width="5"
+    opacity="0.9"
+  />
+
+  <!-- Diamond -->
+  <path
+    d="M512 612L632 758L512 890L392 758L512 612Z"
+    fill="url(#diamondGold)"
+    stroke="url(#gold)"
+    stroke-width="16"
+    stroke-linejoin="round"
+  />
+  <path d="M512 612L512 890" stroke="#FFE08D" stroke-width="4" opacity="0.55"/>
+  <path d="M392 758L632 758" stroke="#4C2708" stroke-width="4" opacity="0.5"/>
+  <path
+    d="M512 642L604 758L512 858L420 758L512 642Z"
+    fill="none"
+    stroke="#1A0B04"
+    stroke-width="5"
+    opacity="0.7"
+  />
+
+  <circle cx="512" cy="512" r="17" fill="#FFE08D"/>
+  <circle cx="512" cy="512" r="8" fill="#D6A94F"/>
+</svg>

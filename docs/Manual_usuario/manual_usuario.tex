@@ -1,0 +1,425 @@
+%----------------------------------------------------------------------------------------
+%	PAQUETES Y CONFIGURACIÓN DEL DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt]{article}
+% Tabla
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Tipografía
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{mathpazo}
+
+% Idioma
+\usepackage[spanish,es-noquoting,es-lcroman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\selectlanguage{spanish}
+
+% Márgenes e imágenes
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{./}{../Memoria/}}
+\usepackage{geometry}
+\geometry{
+  top=3cm,
+  bottom=3.5cm
+}
+
+% Encabezados y pies
+\usepackage{fancyhdr}
+
+% Estilo normal del documento
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{ELCO-Dealer}
+\rhead{\includegraphics[height=1cm]{logo (1).png}}
+\rfoot{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
+
+% Estilo SOLO para la portada
+\fancypagestyle{portada}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{%
+    \makebox[0pt][c]{\includegraphics[width=0.3\paperwidth]{footer_upm.png}}
+  }
+}
+
+\setlength{\footskip}{49pt}
+\setlength{\headheight}{33pt}
+
+% Formato de párrafos
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+\linespread{1.05}
+
+% Otros paquetes
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% Bibliografía
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}}
+\renewcommand{\@listI}{\itemsep=0pt}
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\maketitle}{
+  \begin{flushright}
+    {\LARGE\@title}
+
+    \vspace{50pt}
+
+    {\large\@author}\\
+    \@date
+
+    \vspace{40pt}
+  \end{flushright}
+}
+
+\title{\textbf{ELCO-Dealer}
+\\
+\textit{Manual de usuario} \\ 
+\vspace{0.35cm}
+Electrónica de Consumo}
+
+\author{
+\textsc{
+Javier Carretero,\\
+Carlos González,\\
+Itziar Otaño,\\
+Álvaro Poveda,\\
+Cristina Rodríguez,\\
+Juan Salgado
+}\\[4pt]
+\textit{Universidad Politécnica de Madrid}
+}
+
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+%------------------- PORTADA -------------------
+
+\begin{titlepage}
+\thispagestyle{portada}
+
+\maketitle
+
+\end{titlepage}
+
+\clearpage
+\hypersetup{pageanchor=true}
+\setcounter{page}{1}
+
+%------------------- RESTO DEL DOCUMENTO -------------------
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+\input{Introducción.tex}
+
+\section{Seguridad y preparación}
+
+Antes de manipular el \textbf{ELCO-Dealer} es recomendable comprobar que se ha montado correctamente sin que el prototipo esté conectado a la corriente para reducir el riesgo de que se produzcan daños en el prototipo.
+
+\subsection{Advertencias de uso}
+
+\begin{itemize}
+    \item No introducir ningún objeto en la zona de rodillos ni en la plataforma giratoria mientras el prototipo esté funcionando.
+    \item No retirar manualmente una carta atascada hasta que el prototipo esté desconectado.
+    \item Usar el prototipo sobre una superficie plana y estable.
+    \item No operar el sistema si se observan cables sueltos o piezas mecánicas rozando.
+    \item No modificar el cableado mientras la Arduino y/o los drivers L298N estén siendo alimentados.
+    \item Asegurarse de que las cartas están en buen estado para reducir la probabilidad de atasco.   
+\end{itemize}
+
+\subsection{Herramientas recomendadas}
+
+A la hora de montar o ajustar el prototipo se recomienda disponer de destornilladores de precisión, llaves o alicates pequeños, cinta aislante, multímetro, ordenador con Arduino CLI o Arduino IDE, y una baraja con cartas de tamaño estándar. Durante la calibración inicial es muy recomendable contar con el modo de diagnóstico que aparece en la guía de software.
+
+\section{Descripción general del equipo}
+
+El \textbf{ELCO-Dealer} es una máquina que permite barajar y repartir cartas. Combina un mecanismo de barajado de cartas, un sistema de expulsión mediante rodillos, una plataforma de giro y una interfaz sencilla basada en una pantalla LCD y pulsadores.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{BARAJADOR (1).png}
+    \caption{Vista conceptual del sistema de barajado y reparto}
+    \label{fig:manual_sistema}
+\end{figure}
+
+El usuario establece el número de jugadores y el número de cartas por jugador desde la propia pantalla. Una vez se han establecido el número de jugadores y cartas, el sistema gira (siempre en el mismo sentido) hasta colocar el repartidor frente al jugador correspondiente, expulsa una carta y confirma el paso mediante el sensor de carta. Tras repartir la última carta de la ronda, la plataforma vuelve a HOME.
+
+\subsection{Elementos principales}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.32\textwidth}X}
+\hline
+\textbf{Elemento} & \textbf{Función} \\
+\hline
+Barajador & Sujeta la baraja, mezcla las cartas y las conduce hacia los rodillos de expulsión. \\
+Rodillos de reparto & Arrastran las cartas una a una hacia la salida del mecanismo. \\
+Sensor de carta & Detecta el paso de cada carta para asegurarse de que las cartas abandonan el repartidor cuando toca y evitar recuentos múltiples. \\
+Plataforma giratoria & Orienta la salida del repartidor hacia cada jugador. \\
+Sensor Hall HOME & Detecta los imanes de referencia para poder orientar el repartidor a los jugadores. \\
+Slip Ring & Permite que el prototipo gire sin que los cables se enreden o estropeen. \\
+LCD y pulsadores & Permiten mostrar información sobre el estado actual y establecer el número de jugadores y cartas. \\
+Arduino Mega y L298N & Controlan la lógica del sistema y los motores DC. \\
+\hline
+\end{tabularx}
+\caption{Bloques funcionales del ELCO-Dealer}
+\label{tab:manual_bloques}
+\end{table}
+
+\section{Barajador}
+
+El barajador está compuesto por el soporte de cartas, la zona de guiado y los rodillos que permiten mover las cartas al repartidor. Debe garantizar que las cartas entren rectas y que la presión de los rodillos sea la adecuada para arrastrar una sola carta.
+
+\subsection{Materiales}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.35\textwidth}X}
+\hline
+\textbf{Material} & \textbf{Uso en el barajador} \\
+\hline
+Piezas impresas en 3D & Estructura del soporte de cartas, guías laterales y soporte de los rodillos. \\
+Motor DC de arrastre & Encargado de mover los rodillos de expulsión. \\
+Rodillos y ejes & Contacto con la carta y transmisión del movimiento. \\
+Gomas & Mejora del agarre entre rodillo y carta. \\
+Tornillería y separadores & Fijación de piezas impresas y ajuste de altura. \\
+Sensor de carta & Confirmación de que una carta ha pasado por la salida. \\
+Cableado de señal y alimentación & Conexión del sensor y el motor con la electrónica de control. \\
+\hline
+\end{tabularx}
+\caption{Materiales principales del barajador}
+\label{tab:manual_barajador_materiales}
+\end{table}
+
+\subsection{Montaje}
+
+\begin{enumerate}
+    \item Revisar las piezas impresas y eliminar rebabas que puedan rozar con las cartas.
+    \item Colocar los ejes de los rodillos en sus lugares asignados, comprobando que giran libremente.
+    \item Instalar la goma sobre los rodillos, evitando bultos.
+    \item Fijar el motor DC de arrastre al soporte, alineándolo con el rodillo.
+    \item Montar el soporte de la baraja.
+    \item Colocar el sensor de carta en la salida, de forma que detecte el paso de la carta sin dificultar fisicamente que la carta pase.
+    \item Guiar los cables por zonas sin movimiento y sujetarlos para que no entren en contacto con los rodillos.
+    \item Realizar una prueba manual pasando una carta con los motores desconectados. La carta debería avanzar sin quedarse atrapada.
+\end{enumerate}
+
+Tras el montaje mecánico, se recomienda activar el modo de diagnóstico y comprobar que el sensor de carta cambia de estado al pasar una carta por la salida. Si el sensor queda activo permanentemente, se debe revisar la alineación, la polaridad y la distancia entre el sensor y la carta.
+
+\section{Repartidor}
+
+El repartidor es el encargado de orientar la salida de cartas hacia cada jugador y expulsar las cartas. Está formado por una base fija, una plataforma de giro, el rodamiento tipo \textit{Lazy Susan}, el motor de rotación, los imanes de referencia, el sensor Hall HOME y el Slip Ring.
+
+\subsection{Materiales}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.35\textwidth}X}
+\hline
+\textbf{Material} & \textbf{Uso en el repartidor} \\
+\hline
+Base y plataforma & Soporte del conjunto giratorio impreso en 3D. \\
+Rodamiento tipo \textit{Lazy Susan} & Giro estable de la plataforma con baja fricción. \\
+Motor DC de rotación & Provoca el movimiento que causa que la salida se oriente a los jugadores. \\
+Slip Ring & Paso de alimentación entre la parte fija y la móvil. \\
+Imanes de referencia & Marcan las posiciones de reparto. \\
+Sensor Hall HOME & Permite detectar los imanes de referencia. \\
+Arduino Mega 2560 R3 & Unidad principal de control. \\
+Drivers L298N & Regula la potencia suministrada a los motores. \\
+LCD Keypad Shield cableada & Permite modificar jugadores y cartas y muestra mensajes al usuario. \\
+Tornillería, separadores y cableado & Fijación mecánica e integración eléctrica. \\
+\hline
+\end{tabularx}
+\caption{Materiales principales del repartidor}
+\label{tab:manual_repartidor_materiales}
+\end{table}
+
+\subsection{Montaje}
+
+\begin{enumerate}
+    \item Fijar la base sobre una superficie plana y comprobar que no existe torsión en la estructura.
+    \item Instalar el rodamiento \textit{Lazy Susan} centrado respecto al eje de giro.
+    \item Atornillar la plataforma superior al rodamiento, verificando que gira libremente.
+    \item Colocar el motor de rotación asegurando que el giro se produce en el sentido previsto.
+    \item Distribuir los imanes de referencia de forma uniforme en las posiciones de reparto..
+    \item Instalar el sensor Hall HOME en la base, a una distancia suficiente para detectar los imanes sin rozar con la plataforma.
+    \item Pasar el cableado de la parte móvil a través del Slip Ring.
+    \item Conectar motores, sensor Hall, sensor de carta, LCD y drivers L298N según el mapa de pines definido en el software.
+    \item Sujetar los cables para que no se enrollen, no rocen con la plataforma y no bloqueen el giro.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{lazy_susan.png}
+    \caption{Montaje del rodamiento tipo \textit{Lazy Susan} empleado en la plataforma}
+    \label{fig:manual_lazy_susan}
+\end{figure}
+
+Si durante la prueba de diagnóstico el motor de rotación gira en sentido contrario al esperado, se debe corregir intercambiando los cables del motor en el canal correspondiente del L298N.
+
+\section{Puesta en marcha}
+
+\subsection{Comprobaciones previas}
+
+Antes del primer uso se debe completar la siguiente revisión:
+
+\begin{itemize}
+    \item Los terminales negativos de Arduino, drivers L298N, sensores y fuente de motores deben estar conectados.
+    \item La polaridad de la alimentación de lógica y motores es correcta.
+    \item No hay cortocircuitos entre 5 V, GND y la alimentación de los motores.
+    \item Los motores no tienen cables con los que puedan enredarse.
+    \item El sensor HOME está alineado con los imanes.
+    \item El sensor de carta es estable en reposo y se activa cuando pasa la carta.
+    \item La LCD está encendida y la botonera responde.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{pantalla encendida.png}
+    \caption{Sistema en operación con la pantalla LCD activa}
+    \label{fig:manual_lcd}
+\end{figure}
+
+\subsection{Secuencia de encendido}
+
+\begin{enumerate}
+    \item Colocar la máquina sobre una mesa estable.
+    \item Colocar la baraja en el soporte, en dos pilas distintas alineadas con las guías.
+    \item Conectar la alimentación de la electrónica y los motores.
+    \item Mantener pulsado SELECT hasta que el sistema salga de \texttt{OFF} (se puede observar en la LCD).
+    \item Configurar el número de jugadores.
+    \item Configurar el número de cartas por jugador.
+    \item Confirmar el inicio del reparto automático.
+\end{enumerate}
+
+Durante la puesta en marcha, el sistema podrá detenerse en cualquier momento mediante una pulsación larga de SELECT. Esta acción devuelve el sistema a un estado seguro con los motores parados.
+
+\section{Uso del sistema}
+
+\subsection{Controles}
+
+La interfaz de usuario se ha simplificado para operar con dos acciones principales:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.28\textwidth}X}
+\hline
+\textbf{Acción} & \textbf{Función} \\
+\hline
+SELECT largo & Encender o apagar lógicamente el sistema. (El sistema entra o sale del estado OFF) \\
+SELECT corto & Confirmar selección, avanzar al siguien
+
+te paso o iniciar recuperación desde error. \\
+RIGHT corto & Incrementar jugadores, incrementar cartas o repartir una carta manual según el estado. \\
+\hline
+\end{tabularx}
+\caption{Controles principales de usuario}
+\label{tab:manual_controles}
+\end{table}
+
+\subsection{Reparto automático}
+
+El reparto automático es el modo principal de funcionamiento. El usuario selecciona primero el número de jugadores y después el número de cartas por jugador. Al confirmar, el sistema calcula el total de cartas a repartir y alterna entre dos acciones: girar hacia el slot correspondiente y expulsar una carta.
+
+La pantalla muestra el progreso del reparto mediante el contador de cartas entregadas, el total previsto, el jugador actual y el slot objetivo. Al finalizar la ronda, el repartidor vuelve automáticamente a HOME y queda en estado preparado.
+
+\subsection{Reparto manual}
+
+Una vez el sistema ha completado un ciclo y se encuentra en \texttt{IDLE\_HOME}, una pulsación corta de RIGHT lanza un reparto individual. Este modo resulta útil para pruebas, demostraciones o situaciones en las que se quiera añadir una carta sin repetir toda la ronda automática.
+
+\subsection{Mensajes de pantalla}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.35\textwidth}X}
+\hline
+\textbf{Mensaje} & \textbf{Interpretación} \\
+\hline
+\texttt{OFF / Hold SELECT} & Sistema detenido. Mantener SELECT para iniciar. \\
+\texttt{Players} & Selección del número de jugadores. RIGHT incrementa y SELECT confirma. \\
+\texttt{Cards} & Selección del número de cartas por jugador. RIGHT incrementa y SELECT inicia. \\
+\texttt{Dealing} & Reparto automático en curso. \\
+\texttt{Returning / Home} & La plataforma está buscando la referencia HOME. \\
+\texttt{Ready / ADD one PWR auto} & Sistema preparado. RIGHT reparte una carta; SELECT inicia otra ronda automática. \\
+\texttt{ROTATE\_TIMEOUT} & No se ha detectado el slot esperado durante el giro. \\
+\texttt{CARD\_TIMEOUT} & No se ha detectado carta durante el empuje. \\
+\texttt{RETURN\_HOME / TIMEOUT} & No se ha recuperado la referencia HOME en el tiempo previsto. \\
+\hline
+\end{tabularx}
+\caption{Mensajes principales mostrados en la LCD}
+\label{tab:manual_lcd_messages}
+\end{table}
+
+\section{Mantenimiento}
+
+\subsection{Mantenimiento preventivo}
+
+Para que el prototipo siga funcionando de manera estable es recomendable::
+
+\begin{itemize}
+    \item Limpiar periódicamente los rodillos para conservar la fricción con las cartas.
+    \item Retirar polvo o restos de impresión 3D de las guías de la baraja.
+    \item Comprobar que los imanes siguen firmes en sus posiciones.
+    \item Revisar que el sensor Hall y el sensor de carta no se han desplazado.
+    \item Verificar que los tornillos del rodamiento y del motor de giro no se han aflojado.
+    \item Revisar visualmente el cableado del Slip Ring y de los motores.
+\end{itemize}
+
+\subsection{Después de un atasco}
+
+Si una carta se atasca, se debe detener el sistema con SELECT largo o desconectar la alimentación si el botón no responde. Después se retira la carta manualmente, se comprueba que no haya restos de papel y se realiza una prueba de una sola carta en modo manual. Si el atasco se repite, se debe revisar la presión de los rodillos, la alineación del soporte de cartas y el estado de la baraja.
+
+\section{Resolución de incidencias}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.30\textwidth}X}
+\hline
+\textbf{Incidencia} & \textbf{Comprobaciones recomendadas} \\
+\hline
+La LCD no muestra información & Revisar contraste, 5 V/GND, pines de la LCD y retroiluminación. Confirmar que la botonera responde por A0. \\
+El sistema no detecta HOME & Revisar alimentación del sensor Hall, distancia al imán, polaridad del sensor y pin configurado. \\
+Se cuentan varias cartas con una sola salida & Comprobar alineación del sensor, rebotes, tiempo muerto y que la carta libera el sensor tras pasar. \\
+No sale ninguna carta & Revisar motor de reparto, fricción de rodillos, atasco mecánico y estado del sensor de carta. \\
+La plataforma no llega al jugador & Revisar motor de rotación, imanes, sensor HOME y \textit{timeout} de giro. \\
+El motor gira al revés & Detener el sistema e intercambiar los cables del motor en el canal L298N correspondiente. \\
+Entra en \texttt{ERROR} al poco tiempo & Ejecutar diagnóstico, confirmar flancos de sensor y revisar los tiempos de seguridad configurados. \\
+\hline
+\end{tabularx}
+\caption{Guía rápida de resolución de problemas}
+\label{tab:manual_troubleshooting}
+\end{table}
+
+\section{Cierre}
+
+El \textbf{ELCO-Dealer} ha sido concebido como un prototipo funcional y modular. Un montaje cuidadoso, una calibración progresiva y el uso del modo de diagnóstico antes del reparto completo permiten obtener un comportamiento más fiable y repetible. La operación correcta del sistema depende de la coordinación entre mecánica, electrónica y software, por lo que cualquier ajuste debe realizarse siempre respetando esa separación de subsistemas.
+
+\end{document}

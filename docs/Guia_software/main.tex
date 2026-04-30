@@ -1,0 +1,164 @@
+%----------------------------------------------------------------------------------------
+%	PAQUETES Y CONFIGURACIÓN DEL DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt]{article}
+% Tabla
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Tipografía
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{mathpazo}
+
+% Idioma
+\usepackage[spanish,es-noquoting,es-lcroman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\selectlanguage{spanish}
+
+% Márgenes e imágenes
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{
+  top=3cm,
+  bottom=3.5cm
+}
+
+% Encabezados y pies
+\usepackage{fancyhdr}
+
+% Estilo normal del documento (SIN imagen)
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{ELCO-Dealer}
+\rhead{\includegraphics[height=1cm]{logo (1).png}}
+\rfoot{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
+
+% Estilo SOLO para la portada (con imagen)
+\fancypagestyle{portada}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{%
+    \makebox[0pt][c]{\includegraphics[width=0.3\paperwidth]{footer_upm.png}}
+  }
+}
+
+\setlength{\footskip}{49pt}
+\setlength{\headheight}{33pt}
+
+% Formato de párrafos
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+\linespread{1.05}
+
+% Otros paquetes
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% Bibliografía
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}}
+\renewcommand{\@listI}{\itemsep=0pt}
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\maketitle}{
+  \begin{flushright}
+    {\LARGE\@title}
+
+    \vspace{50pt}
+
+    {\large\@author}\\
+    \@date
+
+    \vspace{40pt}
+  \end{flushright}
+}
+
+\title{\textbf{ELCO-Dealer}
+\\
+\textit{Guía software} \\ 
+\vspace{0.35cm}
+Electrónica de Consumo}
+
+\author{
+\textsc{
+Javier Carretero,\\
+Carlos González,\\
+Itziar Otaño,\\
+Álvaro Poveda,\\
+Cristina Rodríguez,\\
+Juan Salgado
+}\\[4pt]
+\textit{Universidad Politécnica de Madrid}
+}
+
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+%------------------- PORTADA -------------------
+
+\begin{titlepage}
+\thispagestyle{portada}
+
+\maketitle
+
+\end{titlepage}
+
+\clearpage
+\hypersetup{pageanchor=true}
+\setcounter{page}{1}
+
+%------------------- RESTO DEL DOCUMENTO -------------------
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+\input{Introducción.tex}
+
+\section{Objetivo y alcance}
+La guía está orientada a facilitar el mantenimiento y la ampliación del software del \textbf{ELCO-Dealer}. No pretende sustituir al código fuente, sino proporcionar una lectura técnica del mismo: qué hace cada módulo, cómo se comunican entre sí y qué decisiones de diseño permiten que el prototipo funcione de forma determinista.
+
+El software se ha desarrollado en \textbf{C++ para Arduino} y se ejecuta sobre una \textbf{Arduino Mega 2560 R3}. La implementación se basa en una separación estricta entre lógica de estados, acceso a hardware, interfaz de usuario y depuración. Esta decisión reduce el acoplamiento entre partes del sistema y permite probar cada subsistema de forma independiente antes de operar la máquina completa.
+
+\section{Arquitectura del software embebido}
+\input{Guia_software.tex}
+
+\newpage
+\section{Página web}
+\input{web.tex}
+
+\newpage
+\section{Conclusión}
+El software del \textbf{ELCO-Dealer} se ha planteado como una base robusta para un prototipo físico sometido a tolerancias mecánicas, posibles rebotes de sensores y pequeñas variaciones en el movimiento de cartas. La combinación de una máquina de estados finitos, una capa de hardware centralizada, eventos de usuario priorizados y un modo de diagnóstico permite que el sistema sea comprensible, verificable y ampliable.
+
+Como líneas de mejora software se propone ampliar la capa de sensórica a varios puntos de detección de carta, registrar métricas de fallo durante el uso real, añadir perfiles de calibración por tipo de baraja y conectar la electrónica con la plataforma web o una aplicación móvil en futuras versiones del producto.
+
+\nocite{*}
+
+\newpage
+\begingroup
+\sloppy
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\endgroup
+
+
+\end{document}
