@@ -26,7 +26,7 @@ La carpeta `web/` es la web final del proyecto. Las carpetas archivadas en
 
 Version desplegada:
 
-https://enchanting-sopapillas-41b6a0.netlify.app
+[https://enchanting-sopapillas-41b6a0.netlify.app](https://harmonious-chaja-ad6faa.netlify.app)
 
 Build de produccion:
 
