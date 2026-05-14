@@ -1,4 +1,4 @@
-import { CircuitBoard, Play, ShoppingBag } from "lucide-react";
+import { CalendarCheck, CircuitBoard, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../components/Button";
 import { HardwareShowcase } from "../components/HardwareShowcase";
@@ -24,18 +24,18 @@ export function Hero() {
           Sistema automático de reparto de cartas.
         </p>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-casino-muted">
-          Un prototipo funcional que combina mecánica, sensores, motores y una FSM robusta
-          para repartir cartas con una cadencia limpia y repetible.
+          Un prototipo universitario de reparto automático de cartas que integra mecánica,
+          sensores, motores y control por FSM en una propuesta casino-tech visual y escalable.
         </p>
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <Button href="/#demo">
+          <Button href="/#pruebas">
             <Play size={17} aria-hidden="true" />
-            Ver demo
+            Ver pruebas
           </Button>
           <Button to={routes.purchase} tone="ghost">
-            <ShoppingBag size={17} aria-hidden="true" />
-            Comprar / Reservar
+            <CalendarCheck size={17} aria-hidden="true" />
+            Solicitar demo
           </Button>
           <Button href="/#engineering" tone="dark">
             <CircuitBoard size={17} aria-hidden="true" />

@@ -1,8 +1,8 @@
 import { PageTransition } from "../components/PageTransition";
-import { DemoSection } from "../sections/DemoSection";
 import { Engineering } from "../sections/Engineering";
 import { Hero } from "../sections/Hero";
 import { Highlights } from "../sections/Highlights";
+import { PrototypeTestsSection } from "../sections/PrototypeTestsSection";
 import { Reservation } from "../sections/Reservation";
 
 export function HomePage() {
@@ -10,7 +10,7 @@ export function HomePage() {
     <PageTransition>
       <Hero />
       <Highlights />
-      <DemoSection />
+      <PrototypeTestsSection />
       <Engineering />
       <Reservation />
     </PageTransition>

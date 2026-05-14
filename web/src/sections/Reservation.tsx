@@ -1,4 +1,4 @@
-import { ArrowRight, Mail, ShoppingBag } from "lucide-react";
+import { ArrowRight, CalendarCheck, Mail } from "lucide-react";
 import { Button } from "../components/Button";
 import { Reveal } from "../components/Reveal";
 import { routes } from "../data/site";
@@ -11,24 +11,24 @@ export function Reservation() {
           <div className="grid gap-10 overflow-hidden rounded-[2rem] border border-casino-gold/30 bg-[radial-gradient(circle_at_85%_12%,rgba(214,169,79,0.16),transparent_20rem),linear-gradient(135deg,#171316,#09090b_54%,#5b101b)] p-8 shadow-premium lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
             <div>
               <p className="mb-4 text-xs font-black uppercase tracking-[0.26em] text-casino-gold">
-                Reserva / Compra
+                Demo / Contacto
               </p>
               <h2 className="max-w-2xl text-4xl font-black leading-none text-casino-ivory md:text-6xl">
-                Un concepto listo para enseñar, reservar y evolucionar.
+                ¿Quieres conocer ELCO-DEALER?
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-casino-muted">
-                La compra real no está conectada a pagos. Esta ruta deja preparada una
-                experiencia coherente para integrar la web de compra dentro del mismo lenguaje
-                visual.
+                ELCO-DEALER se presenta como prototipo universitario en desarrollo. Si te
+                interesa verlo, probar una demo o recibir más información, puedes dejar una
+                solicitud de contacto.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button to={routes.purchase}>
-                  <ShoppingBag size={17} aria-hidden="true" />
-                  Comprar / Reservar
+                  <CalendarCheck size={17} aria-hidden="true" />
+                  Solicitar demo
                 </Button>
                 <Button to={routes.contact} tone="ghost">
                   <Mail size={17} aria-hidden="true" />
-                  Hablar con soporte
+                  Solicitar información
                 </Button>
               </div>
             </div>
@@ -38,15 +38,15 @@ export function Reservation() {
                 Prototype Access
               </p>
               <h3 className="mt-4 text-3xl font-black text-casino-ivory">
-                Reserva conceptual ELCO-DEALER
+                Acceso a demostración
               </h3>
               <ul className="mt-6 grid gap-4 text-casino-muted">
-                <li>Producto universitario funcional, no ecommerce activo.</li>
-                <li>Diseño visual preparado para campaña y demo pública.</li>
-                <li>Integración futura con compra externa o formulario real.</li>
+                <li>Proyecto preparado para presentación, pruebas guiadas y futuras iteraciones de diseño.</li>
+                <li>Validación parcial mediante pruebas de subsistemas.</li>
+                <li>Sin venta online activa actualmente.</li>
               </ul>
               <Button to={routes.purchase} tone="dark" className="mt-7 w-full">
-                Abrir página de compra
+                Reservar interés
                 <ArrowRight size={17} aria-hidden="true" />
               </Button>
             </div>

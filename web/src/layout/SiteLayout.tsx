@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Menu, ShoppingBag, X } from "lucide-react";
+import { CalendarCheck, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { assetPaths, routes } from "../data/site";
@@ -15,7 +15,7 @@ type NavItem =
 
 const navItems: NavItem[] = [
   { label: "Highlights", href: "/#highlights" },
-  { label: "Demo", href: "/#demo" },
+  { label: "Pruebas", href: "/#pruebas" },
   { label: "Engineering", href: "/#engineering" },
   { label: "Recursos", to: routes.resources },
   { label: "Contacto", to: routes.contact },
@@ -97,8 +97,8 @@ export function SiteLayout({ children }: SiteLayoutProps) {
           </nav>
 
           <Button to={routes.purchase} className="ml-auto hidden lg:inline-flex">
-            <ShoppingBag size={17} aria-hidden="true" />
-            Comprar / Reservar
+            <CalendarCheck size={17} aria-hidden="true" />
+            Solicitar demo
           </Button>
 
           <button
@@ -134,8 +134,8 @@ export function SiteLayout({ children }: SiteLayoutProps) {
                 ),
               )}
               <Button to={routes.purchase} className="mt-2 w-full">
-                <ShoppingBag size={17} aria-hidden="true" />
-                Comprar / Reservar
+                <CalendarCheck size={17} aria-hidden="true" />
+                Solicitar demo
               </Button>
             </nav>
           </div>
@@ -162,7 +162,7 @@ export function SiteLayout({ children }: SiteLayoutProps) {
             Contacto
           </Link>
           <Link className="hover:text-casino-amber" to={routes.purchase}>
-            Compra / reserva
+            Demo / contacto
           </Link>
         </div>
       </footer>

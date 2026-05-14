@@ -8,7 +8,7 @@ La web referencia estos archivos:
 - `manual_usuario.pdf`: manual descargable en `/recursos`.
 - `guia_software.pdf`: guía de software descargable en `/recursos`.
 - `montaje_hw.png`: imagen final del hardware para el hero. Pendiente de sustituir/añadir.
-- `demo_video.mp4`: vídeo final de demo para home y `/recursos`. Pendiente de sustituir/añadir.
+- `demo_video.mp4`: clip de pruebas parciales para home y `/recursos`. Pendiente de sustituir/añadir.
 
 Cuando estén listos `montaje_hw.png` y `demo_video.mp4`, basta con colocarlos en
 esta carpeta manteniendo esos nombres.

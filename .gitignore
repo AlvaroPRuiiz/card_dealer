@@ -1,9 +1,13 @@
+# local/editor
 .vscode/
+
+# internal/private
 AGENTS.md
 context.md
 context*.md
 *context*.md
 
+# node/frontend
 node_modules/
 dist/
 web/node_modules/
@@ -12,20 +16,21 @@ web/*.log
 web/vite-dev.log
 web/vite-dev.err.log
 
-archive/**/node_modules/
-archive/**/dist/
-archive/**/*.log
-
+# caches
 __pycache__/
 .pytest_cache/
 .venv/
 
+# system junk
 .DS_Store
 Thumbs.db
+
+# logs/temp
 *.log
 *.tmp
 *.bak
 
+# LaTeX temp
 docs/_build/
 docs/*.zip
 *.aux
@@ -37,3 +42,15 @@ docs/*.zip
 *.out
 *.lof
 *.lot
+*.bbl
+*.blg
+
+# project scratch / legacy
+scratch/
+archive/
+
+# presentation working files
+presentacion/figuras/
+presentacion/*preview*.png
+presentacion/*contact_sheet*.png
+presentacion/guion_web_final.md

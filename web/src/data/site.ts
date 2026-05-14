@@ -1,7 +1,10 @@
 export const assetPaths = {
   logo: "/assets/logo_elco_dealer_primary.png",
-  hardware: "/assets/montaje_hw.png",
-  demoVideo: "/assets/demo_video.mp4",
+  hardware: "/assets/prototipo_montaje_clean.png",
+  prototype: "/assets/prototipo_montaje_clean.png",
+  productHero: "/assets/29bd5fa7-9124-4cd3-b9d7-23cf0cb7443f.png",
+  platformVideo: "/assets/giro_plataforma.mp4",
+  cardFeedVideo: "/assets/repartir_cartas.mp4",
   manual: "/assets/manual_usuario.pdf",
   softwareGuide: "/assets/guia_software.pdf",
 };
@@ -17,7 +20,7 @@ export const highlights = [
   {
     eyebrow: "01",
     title: "Reparto automático",
-    text: "Secuencia de giro y expulsión diseñada para distribuir cartas de forma repetible entre jugadores.",
+    text: "Secuencia de giro y expulsión planteada para distribuir cartas entre jugadores en una demostración guiada.",
   },
   {
     eyebrow: "02",
@@ -26,13 +29,13 @@ export const highlights = [
   },
   {
     eyebrow: "03",
-    title: "FSM robusta",
-    text: "Control por máquina de estados, eventos priorizados y timeouts de seguridad ante fallos mecánicos.",
+    title: "Control por FSM",
+    text: "Arquitectura por máquina de estados, eventos priorizados y timeouts de seguridad para pruebas de subsistemas.",
   },
   {
     eyebrow: "04",
-    title: "Presentación premium",
-    text: "Una experiencia pública con lenguaje casino-tech, pensada para enseñar el prototipo como producto real.",
+    title: "Diseño demostrativo",
+    text: "Interfaz visual y narrativa casino-tech pensadas para enseñar el concepto de forma clara, atractiva y coherente.",
   },
 ];
 
@@ -58,5 +61,5 @@ export const routes = {
   home: "/",
   resources: "/recursos",
   contact: "/contacto",
-  purchase: "/pagina_web_compra",
+  purchase: "/solicitar-demo",
 };

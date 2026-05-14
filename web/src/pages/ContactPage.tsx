@@ -11,8 +11,8 @@ export function ContactPage() {
         <Reveal>
           <SectionHeading
             eyebrow="Contacto"
-            title="Soporte ficticio con tono de producto real."
-            text="Página preparada para presentar atención al cliente, soporte y contacto comercial sin activar backend ni formularios reales."
+            title="Contacto para demos y colaboración."
+            text="Canales de solicitud para conocer el prototipo, coordinar una demostración guiada o pedir información sobre futuras iteraciones."
           />
         </Reveal>
 
@@ -26,7 +26,7 @@ export function ContactPage() {
                 Atención ELCO-DEALER
               </h2>
               <p className="mt-5 leading-8 text-casino-muted">
-                Para consultas sobre demo, integración, reserva conceptual o documentación
+                Para consultas sobre pruebas, colaboración, demostraciones o documentación
                 técnica del prototipo, estos canales mantienen la identidad de marca pública.
               </p>
             </article>
@@ -38,7 +38,7 @@ export function ContactPage() {
                 icon: Phone,
                 title: "Teléfono",
                 value: contactInfo.phone,
-                text: "Línea ficticia de atención comercial.",
+                text: "Contacto de referencia para presentación del proyecto.",
               },
               {
                 icon: Mail,
@@ -50,7 +50,7 @@ export function ContactPage() {
                 icon: Mail,
                 title: "General",
                 value: contactInfo.helloEmail,
-                text: "Contacto para colaboraciones y demo.",
+                text: "Contacto para colaboraciones y pruebas.",
               },
               {
                 icon: Clock,

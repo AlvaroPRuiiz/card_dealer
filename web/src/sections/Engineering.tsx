@@ -11,7 +11,7 @@ export function Engineering() {
           <SectionHeading
             eyebrow="Engineering"
             title="Arquitectura pensada para no bloquearse."
-            text="La web presenta la capa técnica sin convertirla en una memoria académica: suficiente contexto para entender por qué el prototipo es serio."
+            text="La arquitectura combina control por máquina de estados, sensores de referencia, motores DC y una interfaz física para configurar el reparto."
           />
         </Reveal>
 

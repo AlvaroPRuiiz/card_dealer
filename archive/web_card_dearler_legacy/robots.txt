@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://aesthetic-torrone-2da940.netlify.app/sitemap.xml

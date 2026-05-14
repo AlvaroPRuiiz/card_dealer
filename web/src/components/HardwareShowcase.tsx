@@ -1,9 +1,9 @@
 import { CircuitBoard, Sparkles } from "lucide-react";
+import { useState } from "react";
 import { assetPaths } from "../data/site";
-import { useAssetAvailability } from "./AssetAwareMedia";
 
 export function HardwareShowcase() {
-  const availability = useAssetAvailability(assetPaths.hardware);
+  const [hasImageError, setHasImageError] = useState(false);
 
   return (
     <div className="relative">
@@ -13,12 +13,18 @@ export function HardwareShowcase() {
           Prototype 01
         </div>
 
-        {availability === "available" ? (
-          <img
-            className="aspect-[4/5] w-full object-cover"
-            src={assetPaths.hardware}
-            alt="Montaje hardware del prototipo ELCO-DEALER"
-          />
+        {!hasImageError ? (
+          <div className="relative aspect-[4/3] overflow-hidden bg-[radial-gradient(circle_at_50%_55%,rgba(214,169,79,0.2),transparent_22rem),linear-gradient(145deg,#070707_0%,#15100c_48%,#070707_100%)] p-3 sm:p-4">
+            <div className="absolute inset-x-6 bottom-6 top-1/2 rounded-full bg-casino-gold/15 blur-3xl" />
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(245,239,228,0.06),transparent_30%,rgba(148,27,44,0.14)_78%,transparent)]" />
+            <img
+              className="relative h-full w-full rounded-[1.45rem] border border-casino-gold/20 bg-[#f4f3f1] object-cover object-center shadow-[0_34px_90px_rgba(0,0,0,0.62)]"
+              src={assetPaths.productHero}
+              alt="Maqueta hardware ELCO-DEALER preparada para demostración"
+              onError={() => setHasImageError(true)}
+            />
+            <div className="pointer-events-none absolute inset-4 rounded-[1.45rem] ring-1 ring-white/10" />
+          </div>
         ) : (
           <div className="grid aspect-[4/5] place-items-center bg-[radial-gradient(circle_at_50%_35%,rgba(214,169,79,0.18),transparent_18rem),linear-gradient(145deg,#191316,#08080a_60%,#50101a)] p-8">
             <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-casino-black/70 p-6 shadow-premium">
@@ -35,9 +41,8 @@ export function HardwareShowcase() {
                 Espacio reservado para el montaje real.
               </h3>
               <p className="mt-5 text-sm leading-7 text-casino-muted">
-                Sustituir más adelante con{" "}
-                <span className="font-mono text-casino-amber">/assets/montaje_hw.png</span>.
-                La composición ya está preparada para imagen de producto.
+                Sustituir más adelante con una imagen final del prototipo.
+                La composición ya está preparada para imagen del prototipo.
               </p>
             </div>
           </div>

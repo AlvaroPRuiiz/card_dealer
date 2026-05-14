@@ -10,7 +10,7 @@ export function Highlights() {
           <SectionHeading
             eyebrow="Highlights"
             title="Claridad de hardware con acabado casino-tech."
-            text="Una web pequeña pero pensada como presentación pública de producto: directa, visual y defendible desde el prototipo real."
+            text="Una propuesta casino-tech que combina hardware visible, control electrónico y una experiencia de presentación clara para demostraciones."
           />
         </Reveal>
 

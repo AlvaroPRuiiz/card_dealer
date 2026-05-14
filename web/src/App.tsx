@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { SiteLayout } from "./layout/SiteLayout";
 import { ContactPage } from "./pages/ContactPage";
@@ -16,7 +16,8 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/recursos" element={<ResourcesPage />} />
           <Route path="/contacto" element={<ContactPage />} />
-          <Route path="/pagina_web_compra" element={<PurchasePage />} />
+          <Route path="/solicitar-demo" element={<PurchasePage />} />
+          <Route path="/pagina_web_compra" element={<Navigate to="/solicitar-demo" replace />} />
         </Routes>
       </AnimatePresence>
     </SiteLayout>
